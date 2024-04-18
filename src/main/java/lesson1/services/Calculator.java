@@ -1,6 +1,10 @@
-package other_class;
+package lesson1.services;
 
-public class OtherClass {
+/**
+ * Калькулятор предназначен для выполнения арифметических
+ * операций над числами
+ */
+public class Calculator {
 
     /**
      * Функция суммирования двух целых чисел
@@ -45,4 +49,5 @@ public class OtherClass {
     public static int sub(int a, int b) {
         return a - b;
     }
+
 }
