@@ -10,11 +10,9 @@ import ru.gb.core.lesson1.utils.Decorator;
  */
 /*
 
-javac -sourcepath ./java -d out java/ru/geekbrains/core/ru.gb.core.brightvl.lesson1/task1/Program.java
-java -classpath ./out ru.geekbrains.core.ru.gb.core.brightvl.lesson1.task1.Program
-
-https://www.docker.com/products/docker-desktop/
-https://hub.docker.com/
+javac -sourcepath ./java -d out java/ru/gb/core/lesson1/task1/Program.java
+java -classpath ./out ru.gb.core.lesson1.task1.Program
+javadoc -encoding utf8 -d docs -sourcepath ./java -cp ./out -subpackages ru
 
  */
 public class Program {

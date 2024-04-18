@@ -1,0 +1,4 @@
+FROM openjdk:latest
+WORKDIR /usr/src/app
+COPY out/artifacts/JavaCore_jar/JavaCore.jar .
+CMD ["java", "-jar", "JavaCore.jar"]
