@@ -1,7 +1,7 @@
-package lesson1.task2;
+package ru.gb.core.lesson1.task2;
 
 
-import lesson1.models.Employee;
+import ru.gb.core.lesson1.models.Employee;
 
 import java.sql.*;
 import java.util.ArrayList;

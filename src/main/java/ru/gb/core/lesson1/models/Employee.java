@@ -1,4 +1,4 @@
-package lesson1.models;
+package ru.gb.core.lesson1.models;
 
 import java.util.Random;
 

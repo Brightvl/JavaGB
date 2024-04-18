@@ -1,4 +1,4 @@
-package lesson1.utils;
+package ru.gb.core.lesson1.utils;
 
 /**
  * Декоратор. Он декорирует, то есть, накладывает на результат декорации.

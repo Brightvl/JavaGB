@@ -1,4 +1,4 @@
-package lesson1.services;
+package ru.gb.core.lesson1.services;
 
 /**
  * Калькулятор предназначен для выполнения арифметических

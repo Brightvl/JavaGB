@@ -1,8 +1,8 @@
-package lesson1.task1;
+package ru.gb.core.lesson1.task1;
 
 
-import lesson1.services.Calculator;
-import lesson1.utils.Decorator;
+import ru.gb.core.lesson1.services.Calculator;
+import ru.gb.core.lesson1.utils.Decorator;
 
 /**
  * Основной класс приложения. Здесь мы можем описать
@@ -10,8 +10,8 @@ import lesson1.utils.Decorator;
  */
 /*
 
-javac -sourcepath ./java -d out java/ru/geekbrains/core/lesson1/task1/Program.java
-java -classpath ./out ru.geekbrains.core.lesson1.task1.Program
+javac -sourcepath ./java -d out java/ru/geekbrains/core/ru.gb.core.brightvl.lesson1/task1/Program.java
+java -classpath ./out ru.geekbrains.core.ru.gb.core.brightvl.lesson1.task1.Program
 
 https://www.docker.com/products/docker-desktop/
 https://hub.docker.com/
