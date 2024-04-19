@@ -1,4 +1,4 @@
-package ru.gb.core.lesson2.ui;
+package ru.gb.core.lesson2.Hw2.ui;
 
 public class Colorer {
 

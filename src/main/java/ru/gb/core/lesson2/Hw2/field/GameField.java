@@ -1,7 +1,7 @@
-package ru.gb.core.lesson2.field;
+package ru.gb.core.lesson2.Hw2.field;
 
 
-import ru.gb.core.lesson2.ui.Colorer;
+import ru.gb.core.lesson2.Hw2.ui.Colorer;
 
 public class GameField {
 

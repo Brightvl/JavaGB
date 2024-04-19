@@ -1,7 +1,7 @@
-package ru.gb.core.lesson2.players;
+package ru.gb.core.lesson2.Hw2.players;
 
 
-import ru.gb.core.lesson2.mechanics.Turn;
+import ru.gb.core.lesson2.Hw2.mechanics.Turn;
 
 public abstract class Player {
     private String name;

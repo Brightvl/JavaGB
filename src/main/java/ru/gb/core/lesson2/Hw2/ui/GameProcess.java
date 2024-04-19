@@ -1,11 +1,11 @@
-package ru.gb.core.lesson2.ui;
+package ru.gb.core.lesson2.Hw2.ui;
 
 
-import ru.gb.core.lesson2.field.GameField;
-import ru.gb.core.lesson2.mechanics.GameState;
-import ru.gb.core.lesson2.players.Bot;
-import ru.gb.core.lesson2.players.Human;
-import ru.gb.core.lesson2.players.Player;
+import ru.gb.core.lesson2.Hw2.field.GameField;
+import ru.gb.core.lesson2.Hw2.mechanics.GameState;
+import ru.gb.core.lesson2.Hw2.players.Bot;
+import ru.gb.core.lesson2.Hw2.players.Human;
+import ru.gb.core.lesson2.Hw2.players.Player;
 
 import java.util.InputMismatchException;
 import java.util.Random;

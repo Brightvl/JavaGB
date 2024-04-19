@@ -1,7 +1,7 @@
-package ru.gb.core.lesson2;
+package ru.gb.core.lesson2.Hw2;
 
 
-import ru.gb.core.lesson2.ui.GameProcess;
+import ru.gb.core.lesson2.Hw2.ui.GameProcess;
 /* ТЗ
 1. Полностью разобраться с кодом программы разработанной на семинаре, переписать программу.
 Это минимальная задача для сдачи домашней работы.

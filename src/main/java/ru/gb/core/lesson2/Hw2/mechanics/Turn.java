@@ -1,4 +1,4 @@
-package ru.gb.core.lesson2.mechanics;
+package ru.gb.core.lesson2.Hw2.mechanics;
 
 public class Turn {
     private int y;

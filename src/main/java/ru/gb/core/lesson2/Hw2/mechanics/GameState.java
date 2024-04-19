@@ -1,7 +1,7 @@
-package ru.gb.core.lesson2.mechanics;
+package ru.gb.core.lesson2.Hw2.mechanics;
 
 
-import ru.gb.core.lesson2.field.GameField;
+import ru.gb.core.lesson2.Hw2.field.GameField;
 
 public class GameState {
 
