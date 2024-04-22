@@ -26,10 +26,6 @@ public abstract class Player {
         return turn;
     }
 
-    public void setTurn(Turn turn) {
-        this.turn = turn;
-    }
-
     public void setTurnCoordinate(int x, int y) {
         this.turn.setX(x);
         this.turn.setY(y);

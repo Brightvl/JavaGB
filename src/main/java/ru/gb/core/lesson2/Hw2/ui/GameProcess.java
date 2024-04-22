@@ -46,7 +46,6 @@ public class GameProcess {
         this.bot = new Bot(this);
 
         this.gameRun = true;
-
     }
 
     /**
@@ -80,7 +79,7 @@ public class GameProcess {
         gameField.printField(); // Отрисовка
 
         while (gameRun) {
-            gameProcess(); // запуск игрового процесса
+            gameProcess();
 
             System.out.print("Желаете сыграть еще раз? (Y - да): ");
             String choice = scanner.next();
@@ -105,7 +104,7 @@ public class GameProcess {
      */
     private void gameProcess() {
         while (true) {
-            humanTurn(); // ход игрока
+            humanTurn();
             System.out.println(showNameAndCoordinate(human));
             gameField.printField();
             if (gameState.checkGameState(human.getTurn().getX(), human.getTurn().getY(),
@@ -172,7 +171,7 @@ public class GameProcess {
             }
         } catch (InputMismatchException e) {
             System.out.printf("Вы не ввели целое число!\nСтандартный уровень сложности: %s\n", showDifficult());
-            scanner.nextLine(); // очистить буфер ввода
+            scanner.nextLine();
         }
         return false;
     }

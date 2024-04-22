@@ -14,6 +14,10 @@ import ru.gb.core.lesson2.Hw2.ui.GameProcess;
 
 3.**** Доработать искусственный интеллект, чтобы он мог блокировать ходы игрока.
  */
+
+/**
+ * Класс запускающий игру в Крестики нолики
+ */
 public class TicTacToeApp {
 
     /**
@@ -26,6 +30,4 @@ public class TicTacToeApp {
         gameUi.runGame();
 
     }
-
-
 }
