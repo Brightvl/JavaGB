@@ -9,12 +9,12 @@ public class S2TicTacApp {
     private static final Scanner scanner = new Scanner(System.in);
     private static final Random random = new Random();
     private static final int WIN_COUNT = 4;
-    private static final char DOT_HUMAN = 'X';
-    private static final char DOT_AI = '0';
-    private static final char DOT_EMPTY = '*';
-    private static int fieldSizeX;
-    private static int fieldSizeY;
-    private static char[][] field;
+    static final char DOT_HUMAN = 'X';
+    static final char DOT_AI = '0';
+    static final char DOT_EMPTY = '*';
+    public static int fieldSizeX;
+    protected static int fieldSizeY;
+    static char[][] field;
 
 
     public static void main(String[] args) {

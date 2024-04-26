@@ -1,6 +1,7 @@
 package ru.gb.core.lesson3.hw3.empoyee.comparators;
 
-import org.example.lesson_3.hw_3.empoyee.Employee;
+
+import ru.gb.core.lesson3.hw3.empoyee.Employee;
 
 import java.util.Comparator;
 

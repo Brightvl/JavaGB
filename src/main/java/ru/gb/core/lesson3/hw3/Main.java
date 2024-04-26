@@ -1,9 +1,10 @@
 package ru.gb.core.lesson3.hw3;
 
-import org.example.lesson_3.hw_3.empoyee.Employee;
-import org.example.lesson_3.hw_3.empoyee.Freelancer;
-import org.example.lesson_3.hw_3.empoyee.Worker;
-import org.example.lesson_3.hw_3.empoyee.comparators.ComparatorAverageMonthlySalary;
+
+import ru.gb.core.lesson3.hw3.empoyee.Employee;
+import ru.gb.core.lesson3.hw3.empoyee.Freelancer;
+import ru.gb.core.lesson3.hw3.empoyee.Worker;
+import ru.gb.core.lesson3.hw3.empoyee.comparators.ComparatorAverageMonthlySalary;
 
 import java.util.Arrays;
 import java.util.Collections;

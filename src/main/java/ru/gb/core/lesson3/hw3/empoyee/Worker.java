@@ -10,7 +10,6 @@ public class Worker extends Employee {
      * Фабричный метод для создания объекта
      *
      * @param name
-     * @param age
      * @return
      */
     public static Worker create(String name, double monthlySalary) {

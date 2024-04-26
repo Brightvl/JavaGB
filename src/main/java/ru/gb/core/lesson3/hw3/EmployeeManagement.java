@@ -1,6 +1,8 @@
 package ru.gb.core.lesson3.hw3;
 
-import org.example.lesson_3.hw_3.empoyee.Employee;
+
+
+import ru.gb.core.lesson3.hw3.empoyee.Employee;
 
 import java.util.ArrayList;
 import java.util.Collections;
