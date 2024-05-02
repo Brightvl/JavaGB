@@ -5,14 +5,14 @@ import java.io.File;
 public class Tree {
 
     public static void main(String[] args) {
-        print(new File("src/main/"), "", true);
+        print(new File("src/main/java"), "", true);
     }
 
     /**
      * Метод выводит в консоль древо директорий вглубь относительно указанного файла
      * @param file файл
-     * @param indent
-     * @param isLast
+     * @param indent строка отступа
+     * @param isLast является ли текущая директория последней в списке родительской директории
      */
     static void print(File file, String indent, boolean isLast) {
         System.out.print(indent);
