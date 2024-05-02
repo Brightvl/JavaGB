@@ -73,12 +73,20 @@ public class Program {
 
     }
 
-    private static boolean createMissingDirectory(File file) {
+    /**
+     * Создает недостающие директории
+     *
+     * @param file путь к директории
+     */
+    private static void createMissingDirectory(File file) {
         if (!file.exists()) {
-            return file.mkdir();
-
+            if (file.mkdir()) {
+                File createdDirectory = new File(file.getParent(), file.getName());
+                System.out.printf("Создана директория '%s'%n", createdDirectory.getName());
+            } else {
+                System.out.println("Ошибка при создании директории.");
+            }
         }
-        return false;
     }
 
     //region Создание строки
