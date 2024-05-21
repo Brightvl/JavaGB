@@ -1,27 +1,15 @@
 package ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.server;
 
+import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.client.ClientGUI;
+import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.server.UI.ServerGUI;
+import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.server.UI.View;
 
-import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.client.Client;
-
-import javax.swing.*;
-import java.awt.*;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Класс сервера
- */
-public class Server extends JFrame {
-    /**
-     * Ширина окна
-     */
-    public static final int WIDTH = 400;
-    /**
-     * Высота
-     */
-    public static final int HEIGHT = 300;
+public class Server implements ServerAdminApi {
     /**
      * Путь к log файлу
      */
@@ -30,48 +18,26 @@ public class Server extends JFrame {
     /**
      * Хранит в себе клиентов работающих с сервером
      */
-    private final List<Client> CLIENT_GUI_LIST;
-
+    private final List<ClientGUI> CLIENT_GUI_LIST;
 
     /**
-     * Текстовая панель вывода логов
+     * Экземпляр сервера
      */
-    private JTextArea log;
+    private View serverGUI;
+
+
     /**
      * Состояние работы севера
      */
     private boolean work;
 
-    /**
-     * Конструктор класса
-     */
     public Server() {
         CLIENT_GUI_LIST = new ArrayList<>();
-
-        setWindowParams();
-        createPanel();
-        setVisible(true);
     }
 
-    /**
-     * Параметры GUI
-     */
-    private void setWindowParams() {
-        setSize(WIDTH, HEIGHT);
-        setLocationRelativeTo(null); // расположение в центре экрана
-        setResizable(false);
 
-        setTitle("Server panel");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-    }
-
-    /**
-     * Создать GUI сервера
-     */
-    private void createPanel() {
-        log = new JTextArea();
-        add(log);
-        add(createButtons(), BorderLayout.SOUTH);
+    public void showGUI() {
+        serverGUI = new ServerGUI(this);
     }
 
 
@@ -81,7 +47,7 @@ public class Server extends JFrame {
      * @param clientGUI клиент
      * @return true если успешно
      */
-    public boolean connectUser(Client clientGUI) {
+    public boolean connectUser(ClientGUI clientGUI) {
         if (!work) {
             return false;
         }
@@ -89,40 +55,20 @@ public class Server extends JFrame {
         return true;
     }
 
-    /**
-     * Получить лог сообщений
-     *
-     * @return строка
-     */
-    public String getLog() {
-        return readLog();
-    }
+
+
+
 
     /**
      * Отключение клиента от сервера - удаляет из списка
      *
      * @param clientGUI клиент
      */
-    public void disconnectUser(Client clientGUI) {
+    public void disconnectUser(ClientGUI clientGUI) {
         CLIENT_GUI_LIST.remove(clientGUI);
         if (clientGUI != null) {
             clientGUI.disconnectFromServer();
         }
-    }
-
-    /**
-     * Создает сообщение и сохраняет в log файл
-     *
-     * @param text сообщение
-     */
-    public void message(String text) {
-        if (!work) {
-            return;
-        }
-        text += "";
-        appendLog(text);
-        answerAll(text);
-        saveInLog(text);
     }
 
     /**
@@ -131,7 +77,7 @@ public class Server extends JFrame {
      * @param text сообщение
      */
     private void answerAll(String text) {
-        for (Client clientGUI : CLIENT_GUI_LIST) {
+        for (ClientGUI clientGUI : CLIENT_GUI_LIST) {
             clientGUI.answer(text);
         }
     }
@@ -171,68 +117,48 @@ public class Server extends JFrame {
     }
 
     /**
-     * Добавить в GUI log сообщение
+     * Получить лог сообщений
+     *
+     * @return строка
+     */
+    public String getLog() {
+        return readLog();
+    }
+
+    /**
+     * Создает сообщение и сохраняет в log файл
      *
      * @param text сообщение
      */
-    private void appendLog(String text) {
-        log.append(text + "\n");
+    public void message(String text) {
+        if (!isServerWorking()) {
+            return;
+        }
+        text += "";
+        serverGUI.appendMessage(text);
+        answerAll(text);
+        saveInLog(text);
+    }
+
+    @Override
+    public boolean isServerWorking() {
+        return work;
+    }
+
+    @Override
+    public void startServer() {
+        work = true;
+        answerAll("Сервер запущен");
+        saveInLog("Сервер запущен");
     }
 
 
-    /**
-     * Создает компонент с кнопками
-     *
-     * @return Компонент
-     */
-    private Component createButtons() {
-        JPanel panel = new JPanel(new GridLayout(1, 2));
-
-        panel.add(createBtnStart());
-        panel.add(createBtnStop());
-        return panel;
-    }
-
-    /**
-     * Кнопка стоп
-     *
-     * @return компонент
-     */
-    private Component createBtnStop() {
-        JButton btnStop = new JButton("Stop");
-        btnStop.addActionListener(e -> {
-            if (!work) {
-                appendLog("Сервер уже остановлен");
-            } else {
-                work = false;
-                List<Client> clientsToDisconnect = new ArrayList<>(CLIENT_GUI_LIST);
-                for (Client clientGUI : clientsToDisconnect) {
-                    disconnectUser(clientGUI);
-                }
-                appendLog("Сервер остановлен!");
-            }
-        });
-        return btnStop;
-    }
-
-
-    /**
-     * Кнопка старт
-     *
-     * @return компонент
-     */
-    private Component createBtnStart() {
-        JButton btnStart = new JButton("Start");
-
-        btnStart.addActionListener(e -> {
-            if (work) {
-                appendLog("Сервер уже запущен");
-            } else {
-                work = true;
-                appendLog("Сервер запущен!");
-            }
-        });
-        return btnStart;
+    @Override
+    public void disconnect() {
+        this.work = false;
+        List<ClientGUI> clientsToDisconnect = new ArrayList<>(CLIENT_GUI_LIST);
+        for (ClientGUI clientGUI : clientsToDisconnect) {
+            disconnectUser(clientGUI);
+        }
     }
 }
-
