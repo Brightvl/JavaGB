@@ -1,4 +1,6 @@
-package ru.gb.developmentKit.lesson1_GUI.hw1_server;
+package ru.gb.developmentKit.lesson1_GUI.hw1_server.client;
+
+import ru.gb.developmentKit.lesson1_GUI.hw1_server.server.Server;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,25 +36,25 @@ public class Client extends JFrame {
     /**
      * Текстовая область
      */
-    JTextArea log;
+    private JTextArea log;
     /**
      * Однострочное поле
      */
-    JTextField tfIPAddress, tfPort, tfLogin, tfMessage;
+    private JTextField tfIPAddress, tfPort, tfLogin, tfMessage;
     /**
      * Поле ввода пароля
      */
-    JPasswordField pfPassword;
+    private JPasswordField pfPassword;
     /**
      * Кнопки
      */
-    JButton btnLogin, btnSend;
+    private JButton btnLogin, btnSend;
     /**
      * Окно авторизации
      */
-    JPanel loginPanel;
+    private JPanel loginPanel;
 
-    Client(Server server, int x) {
+    public Client(Server server, int x) {
         this.server = server;
 
         setWindowParams(server.getX() + x, server.getY());

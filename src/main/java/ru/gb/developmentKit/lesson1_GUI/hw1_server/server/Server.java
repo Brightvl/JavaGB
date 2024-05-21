@@ -1,4 +1,6 @@
-package ru.gb.developmentKit.lesson1_GUI.hw1_server;
+package ru.gb.developmentKit.lesson1_GUI.hw1_server.server;
+
+import ru.gb.developmentKit.lesson1_GUI.hw1_server.client.Client;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,7 +44,7 @@ public class Server extends JFrame {
     /**
      * Конструктор класса
      */
-    Server() {
+    public Server() {
         CLIENT_GUI_LIST = new ArrayList<>();
 
         setWindowParams();
