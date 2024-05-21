@@ -1,4 +1,4 @@
-package ru.gb.developmentKit.lesson1_GUI.hw1;
+package ru.gb.developmentKit.lesson1_GUI.hw1_server;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,12 +22,12 @@ public class Server extends JFrame {
     /**
      * Путь к log файлу
      */
-    public static final String PATH = "src/main/java/ru/gb/developmentKit/lesson1_GUI/hw1/log.txt";
+    public static final String PATH = "src/main/java/ru/gb/developmentKit/lesson1_GUI/hw1_server/data/log.txt";
 
     /**
      * Хранит в себе клиентов работающих с сервером
      */
-    private List<ClientGUI> clientGUIList;
+    private final List<Client> CLIENT_GUI_LIST;
 
 
     /**
@@ -43,7 +43,7 @@ public class Server extends JFrame {
      * Конструктор класса
      */
     Server() {
-        clientGUIList = new ArrayList<>();
+        CLIENT_GUI_LIST = new ArrayList<>();
 
         setWindowParams();
         createPanel();
@@ -55,7 +55,7 @@ public class Server extends JFrame {
      */
     private void setWindowParams() {
         setSize(WIDTH, HEIGHT);
-        setLocationRelativeTo(null); // расположение окна
+        setLocationRelativeTo(null); // расположение в центре экрана
         setResizable(false);
 
         setTitle("Server panel");
@@ -78,11 +78,11 @@ public class Server extends JFrame {
      * @param clientGUI клиент
      * @return true если успешно
      */
-    public boolean connectUser(ClientGUI clientGUI) {
+    public boolean connectUser(Client clientGUI) {
         if (!work) {
             return false;
         }
-        clientGUIList.add(clientGUI);
+        CLIENT_GUI_LIST.add(clientGUI);
         return true;
     }
 
@@ -100,8 +100,8 @@ public class Server extends JFrame {
      *
      * @param clientGUI клиент
      */
-    public void disconnectUser(ClientGUI clientGUI) {
-        clientGUIList.remove(clientGUI);
+    public void disconnectUser(Client clientGUI) {
+        CLIENT_GUI_LIST.remove(clientGUI);
         if (clientGUI != null) {
             clientGUI.disconnectFromServer();
         }
@@ -128,7 +128,7 @@ public class Server extends JFrame {
      * @param text сообщение
      */
     private void answerAll(String text) {
-        for (ClientGUI clientGUI : clientGUIList) {
+        for (Client clientGUI : CLIENT_GUI_LIST) {
             clientGUI.answer(text);
         }
     }
@@ -199,11 +199,11 @@ public class Server extends JFrame {
         JButton btnStop = new JButton("Stop");
         btnStop.addActionListener(e -> {
             if (!work) {
-                appendLog("Сервер уже был остановлен");
+                appendLog("Сервер уже остановлен");
             } else {
                 work = false;
-                List<ClientGUI> clientsToDisconnect = new ArrayList<>(clientGUIList);
-                for (ClientGUI clientGUI : clientsToDisconnect) {
+                List<Client> clientsToDisconnect = new ArrayList<>(CLIENT_GUI_LIST);
+                for (Client clientGUI : clientsToDisconnect) {
                     disconnectUser(clientGUI);
                 }
                 appendLog("Сервер остановлен!");
@@ -223,7 +223,7 @@ public class Server extends JFrame {
 
         btnStart.addActionListener(e -> {
             if (work) {
-                appendLog("Сервер уже был запущен");
+                appendLog("Сервер уже запущен");
             } else {
                 work = true;
                 appendLog("Сервер запущен!");

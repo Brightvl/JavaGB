@@ -1,4 +1,4 @@
-package ru.gb.developmentKit.lesson1_GUI.hw1;
+package ru.gb.developmentKit.lesson1_GUI.hw1_server;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 /**
  * Класс клиента
  */
-public class ClientGUI extends JFrame {
+public class Client extends JFrame {
     /**
      * Ширина окна
      */
@@ -52,7 +52,7 @@ public class ClientGUI extends JFrame {
      */
     JPanel loginPanel;
 
-    ClientGUI(Server server, int x) {
+    Client(Server server, int x) {
         this.server = server;
 
         setWindowParams(server.getX() + x, server.getY());
