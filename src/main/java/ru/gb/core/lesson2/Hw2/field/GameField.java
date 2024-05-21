@@ -1,11 +1,11 @@
 package ru.gb.core.lesson2.Hw2.field;
 
 
-import ru.gb.core.lesson2.Hw2.ui.Colorer;
+import ru.gb.core.lesson2.Hw2.ui.Colorant;
 
 public class GameField {
 
-    Colorer colorer;
+    Colorant colorant;
 
     private final char DOT_EMPTY = '*';
 
@@ -18,7 +18,7 @@ public class GameField {
     public GameField(int widthField, int heightFields) {
         this.fieldSizeX = widthField;
         this.fieldSizeY = heightFields;
-        this.colorer = new Colorer();
+        this.colorant = new Colorant();
 
         this.field = new char[fieldSizeY][fieldSizeX];
 
@@ -41,16 +41,16 @@ public class GameField {
     public void printField() {
         System.out.print("+ ");
         for (int i = 0; i < fieldSizeY; i++) {
-            System.out.print(colorer.stringColor(33, " " + (i + 1)));
+            System.out.print(colorant.stringColor(33, " " + (i + 1)));
         }
         System.out.println(" ↔ X");
         for (int i = 0; i < fieldSizeX; i++) {
-            System.out.print(colorer.stringColor(32, i + 1) + " |");
+            System.out.print(colorant.stringColor(32, i + 1) + " |");
             for (int j = 0; j < fieldSizeY; j++) {
                 if (field[i][j] == '0') {
-                    System.out.print(colorer.stringColor(34, field[i][j]) + "|");
+                    System.out.print(colorant.stringColor(34, field[i][j]) + "|");
                 } else if (field[i][j] == 'X') {
-                    System.out.print(colorer.stringColor(31, field[i][j]) + "|");
+                    System.out.print(colorant.stringColor(31, field[i][j]) + "|");
                 } else {
                     System.out.print(field[i][j] + "|");
                 }

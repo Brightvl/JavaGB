@@ -1,6 +1,6 @@
 package ru.gb.core.lesson2.Hw2.ui;
 
-public class Colorer {
+public class Colorant {
 
 
 

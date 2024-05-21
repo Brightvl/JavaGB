@@ -23,7 +23,7 @@ public class GameProcess {
     private GameField gameField;
     private GameState gameState;
 
-    private Colorer colorer;
+    private Colorant colorant;
     private Human human;
     private Bot bot;
 
@@ -41,7 +41,7 @@ public class GameProcess {
         this.gameField = new GameField(widthField, heightField);
         this.gameState = new GameState(gameField, winCount);
 
-        this.colorer = new Colorer();
+        this.colorant = new Colorant();
         this.human = new Human(this);
         this.bot = new Bot(this);
 
@@ -75,7 +75,7 @@ public class GameProcess {
      */
     private void gameUi() {
         gameField.initialize(); // Инициализация доски
-        System.out.println("Игрок: " + colorer.stringColor(31, human.getName()));
+        System.out.println("Игрок: " + colorant.stringColor(31, human.getName()));
         gameField.printField(); // Отрисовка
 
         while (gameRun) {
