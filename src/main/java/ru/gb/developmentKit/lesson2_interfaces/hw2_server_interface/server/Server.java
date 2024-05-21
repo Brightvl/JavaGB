@@ -1,7 +1,7 @@
-package ru.gb.developmentKit.lesson2.hw2_server_interface.server;
+package ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.server;
 
 
-import ru.gb.developmentKit.lesson2.hw2_server_interface.client.Client;
+import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.client.Client;
 
 import javax.swing.*;
 import java.awt.*;
