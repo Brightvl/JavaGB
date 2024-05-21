@@ -1,6 +1,7 @@
 package ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.client;
 
-import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.View;
+import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.client.UI.ClientGUI;
+import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.client.UI.ClientView;
 import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.server.Server;
 import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.server.ServerApi;
 

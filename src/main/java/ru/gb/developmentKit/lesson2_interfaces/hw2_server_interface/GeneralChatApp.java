@@ -3,7 +3,6 @@ package ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface;
 
 
 import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.client.Client;
-import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.client.ClientGUI;
 import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.server.Server;
 
 public class GeneralChatApp {
@@ -13,6 +12,7 @@ public class GeneralChatApp {
 
         new Client(server);
 
+        new Client(server);
     }
 }
 
