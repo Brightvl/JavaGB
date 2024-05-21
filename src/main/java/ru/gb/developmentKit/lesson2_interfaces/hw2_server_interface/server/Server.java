@@ -1,8 +1,9 @@
 package ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.server;
 
+import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.client.Client;
 import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.client.ClientGUI;
 import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.server.UI.ServerGUI;
-import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.server.UI.View;
+import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.View;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -18,7 +19,7 @@ public class Server implements ServerAdminApi {
     /**
      * Хранит в себе клиентов работающих с сервером
      */
-    private final List<ClientGUI> CLIENT_GUI_LIST;
+    private final List<Client> CLIENT_GUI_LIST;
 
     /**
      * Экземпляр сервера
@@ -41,33 +42,11 @@ public class Server implements ServerAdminApi {
     }
 
 
-    /**
-     * Попытка подключения клиента к серверу, если успешно - добавляем клиента в список
-     *
-     * @param clientGUI клиент
-     * @return true если успешно
-     */
-    public boolean connectUser(ClientGUI clientGUI) {
-        if (!work) {
-            return false;
-        }
-        CLIENT_GUI_LIST.add(clientGUI);
-        return true;
-    }
 
-
-
-
-
-    /**
-     * Отключение клиента от сервера - удаляет из списка
-     *
-     * @param clientGUI клиент
-     */
-    public void disconnectUser(ClientGUI clientGUI) {
-        CLIENT_GUI_LIST.remove(clientGUI);
-        if (clientGUI != null) {
-            clientGUI.disconnectFromServer();
+    public void disconnectUser(Client client) {
+        CLIENT_GUI_LIST.remove(client);
+        if (client != null) {
+            client.disconnectFromServer();
         }
     }
 
@@ -77,8 +56,8 @@ public class Server implements ServerAdminApi {
      * @param text сообщение
      */
     private void answerAll(String text) {
-        for (ClientGUI clientGUI : CLIENT_GUI_LIST) {
-            clientGUI.answer(text);
+        for (Client client : CLIENT_GUI_LIST) {
+            client.appendMessage(text);
         }
     }
 
@@ -116,11 +95,7 @@ public class Server implements ServerAdminApi {
         }
     }
 
-    /**
-     * Получить лог сообщений
-     *
-     * @return строка
-     */
+    @Override
     public String getLog() {
         return readLog();
     }
@@ -146,6 +121,15 @@ public class Server implements ServerAdminApi {
     }
 
     @Override
+    public boolean connectUser(Client client) {
+        if (!work) {
+            return false;
+        }
+        CLIENT_GUI_LIST.add(client);
+        return true;
+    }
+
+    @Override
     public void startServer() {
         work = true;
         answerAll("Сервер запущен");
@@ -156,9 +140,9 @@ public class Server implements ServerAdminApi {
     @Override
     public void disconnect() {
         this.work = false;
-        List<ClientGUI> clientsToDisconnect = new ArrayList<>(CLIENT_GUI_LIST);
-        for (ClientGUI clientGUI : clientsToDisconnect) {
-            disconnectUser(clientGUI);
+        List<Client> clientsToDisconnect = new ArrayList<>(CLIENT_GUI_LIST);
+        for (Client client : clientsToDisconnect) {
+            disconnectUser(client);
         }
     }
 }

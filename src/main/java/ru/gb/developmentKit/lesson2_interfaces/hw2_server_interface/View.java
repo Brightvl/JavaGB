@@ -1,4 +1,4 @@
-package ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.server.UI;
+package ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface;
 
 public interface View {
     /**
@@ -7,4 +7,6 @@ public interface View {
      * @param message сообщение
      */
     void appendMessage(String message);
+
+    void setText(String text);
 }

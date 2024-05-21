@@ -1,8 +1,6 @@
 package ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.client;
 
-
-import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.server.Server;
-
+// todo надо сделать обращение к серверу через интерфейс
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -11,7 +9,7 @@ import java.awt.event.KeyEvent;
 /**
  * Класс клиента
  */
-public class ClientGUI extends JFrame {
+public class ClientGUI extends JFrame implements ClientView {
     /**
      * Ширина окна
      */
@@ -20,19 +18,6 @@ public class ClientGUI extends JFrame {
      * Высота окна
      */
     public static final int HEIGHT = 400;
-
-    /**
-     * Объект сервер
-     */
-    private final Server server;
-    /**
-     * Состояние подключения
-     */
-    private boolean connected;
-    /**
-     * Имя клиента
-     */
-    private String name;
 
     /**
      * Текстовая область
@@ -55,10 +40,12 @@ public class ClientGUI extends JFrame {
      */
     private JPanel loginPanel;
 
-    public ClientGUI(Server server, int x) {
-        this.server = server;
+    private ClientApi client;
 
-        setWindowParams(x, 500);
+    public ClientGUI(Client client, int x) {
+        this.client = client;
+
+        setWindowParams(500, 500);
         createPanel();
         setVisible(true);
     }
@@ -80,70 +67,6 @@ public class ClientGUI extends JFrame {
         add(createLoginPanel(), BorderLayout.NORTH);
         add(createLog());
         add(createInputTextPanel(), BorderLayout.SOUTH);
-    }
-
-    /**
-     * Ответ
-     *
-     * @param text Текст
-     */
-    public void answer(String text) {
-        appendLog(text);
-    }
-
-    /**
-     * Подключение к серверу
-     */
-    private void connectToServer() {
-        if (server.connectUser(this)) {
-            appendLog("Вы успешно подключились!\n");
-            loginPanel.setVisible(false);
-            connected = true;
-            name = tfLogin.getText();
-            String log = server.getLog();
-            if (log != null) {
-                appendLog(log);
-            }
-        } else {
-            appendLog("Подключение не удалось");
-        }
-    }
-
-    /**
-     * Отключает клиента от сервера
-     */
-    public void disconnectFromServer() {
-        if (connected) {
-            loginPanel.setVisible(true);
-            connected = false;
-            server.disconnectUser(this);
-            appendLog("Вы были отключены от сервера!");
-        }
-    }
-
-    /**
-     * Выводит сообщение из log
-     */
-    public void message() {
-        if (connected) {
-            String text = tfMessage.getText();
-            if (!text.isEmpty()) {
-                server.message(name + ": " + text);
-                tfMessage.setText("");
-            }
-        } else {
-            appendLog("Нет подключения к серверу");
-        }
-
-    }
-
-    /**
-     * Выводит сообщение log в окно чата
-     *
-     * @param text сообщение
-     */
-    private void appendLog(String text) {
-        log.append(text + "\n");
     }
 
 
@@ -190,22 +113,58 @@ public class ClientGUI extends JFrame {
             @Override
             public void keyTyped(KeyEvent e) {
                 if (e.getKeyChar() == '\n') {
-                    message();
+                    getMessage();
                 }
             }
         });
         btnSend = new JButton("Send");
-        btnSend.addActionListener(e -> message());
+        btnSend.addActionListener(e -> getMessage());
         panel.add(tfMessage);
         panel.add(btnSend, BorderLayout.EAST);
         return panel;
     }
 
+    /**
+     * Выводит сообщение из log
+     */
+    public void getMessage() {
+        client.getMessage(tfMessage.getText());
+    }
+
+    public void connectToServer() {
+        client.connectToServer(tfLogin.getText());
+        if (client.isConnected()) {
+            loginPanel.setVisible(false);
+        }
+    }
+
+    public void disconnectFromServer() {
+        client.disconnectFromServer();
+        disconnectClient();
+    }
+
+    @Override
+    public void appendMessage(String message) {
+        log.append(message + "\n");
+    }
+
+    @Override
+    public void setText(String text) {
+        tfMessage.getText();
+    }
 
     @Override
     public int getDefaultCloseOperation() {
         disconnectFromServer();
         return super.getDefaultCloseOperation();
+    }
+
+
+    @Override
+    public void disconnectClient() {
+        if (!client.isConnected()) {
+            loginPanel.setVisible(true);
+        }
     }
 }
 

@@ -1,6 +1,7 @@
 package ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.server.UI;
 
 
+import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.View;
 import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.server.Server;
 import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.server.ServerAdminApi;
 
@@ -10,7 +11,7 @@ import java.awt.*;
 /**
  * Класс сервера
  */
-public class ServerGUI extends JFrame implements View{
+public class ServerGUI extends JFrame implements View {
     /**
      * Ширина окна
      */
@@ -75,23 +76,7 @@ public class ServerGUI extends JFrame implements View{
         return panel;
     }
 
-    /**
-     * Кнопка стоп
-     *
-     * @return компонент
-     */
-    private Component createBtnStop() {
-        JButton btnStop = new JButton("Stop");
-        btnStop.addActionListener(e -> {
-            if (!server.isServerWorking()) {
-                appendMessage("Сервер уже остановлен");
-            } else {
-                server.disconnect();
-                appendMessage("Сервер остановлен!");
-            }
-        });
-        return btnStop;
-    }
+
 
 
     /**
@@ -113,9 +98,32 @@ public class ServerGUI extends JFrame implements View{
         return btnStart;
     }
 
+    /**
+     * Кнопка стоп
+     *
+     * @return компонент
+     */
+    private Component createBtnStop() {
+        JButton btnStop = new JButton("Stop");
+        btnStop.addActionListener(e -> {
+            if (!server.isServerWorking()) {
+                appendMessage("Сервер уже остановлен");
+            } else {
+                server.disconnect();
+                appendMessage("Сервер остановлен!");
+            }
+        });
+        return btnStop;
+    }
+
     @Override
     public void appendMessage(String message) {
         log.append(message + "\n");
+    }
+
+    @Override
+    public void setText(String text) {
+        log.setText(text);
     }
 }
 
