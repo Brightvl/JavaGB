@@ -16,7 +16,7 @@ public class ClientGUI extends JFrame {
     /**
      * Высота окна
      */
-    public static final int HEIGHT = 300;
+    public static final int HEIGHT = 400;
 
     /**
      * Объект сервер
