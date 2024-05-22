@@ -10,7 +10,11 @@ public class Client implements ClientApi {
     /**
      * Объект сервер
      */
-    private final ServerApi server;
+    private final ServerApi SERVER;
+    /**
+     * Объект view
+     */
+    private final ClientView CLIENT_VIEW;
     /**
      * Состояние подключения
      */
@@ -20,12 +24,12 @@ public class Client implements ClientApi {
      */
     private String login;
 
-    private ClientView clientView;
+
 
 
     public Client(Server server) {
-        this.server = server;
-        this.clientView = new ClientGUI(this, 50);
+        this.SERVER = server;
+        this.CLIENT_VIEW = new ClientGUI(this, 50);
     }
 
 
@@ -36,16 +40,16 @@ public class Client implements ClientApi {
 
     @Override
     public void connectToServer(String login) {
-        if (server.connectUser(this)) {
-            clientView.appendMessage("Вы успешно подключились!\n");
+        if (SERVER.connectUser(this)) {
+            CLIENT_VIEW.appendMessage("Вы успешно подключились!\n");
             connected = true;
             this.login = login;
-            String log = server.getLog();
+            String log = SERVER.getLog();
             if (log != null) {
-                clientView.appendMessage(log);
+                CLIENT_VIEW.appendMessage(log);
             }
         } else {
-            clientView.appendMessage("Подключение не удалось");
+            CLIENT_VIEW.appendMessage("Подключение не удалось");
         }
     }
 
@@ -54,9 +58,9 @@ public class Client implements ClientApi {
         if (connected) {
 
             connected = false;
-            server.disconnectUser(this);
-            clientView.disconnectClient();
-            clientView.appendMessage("Вы были отключены от сервера!");
+            SERVER.disconnectUser(this);
+            CLIENT_VIEW.disconnectClient();
+            CLIENT_VIEW.appendMessage("Вы были отключены от сервера!");
         }
     }
 
@@ -65,8 +69,8 @@ public class Client implements ClientApi {
         if (connected) {
             String text = message;
             if (!text.isEmpty()) {
-                server.message(login + ": " + text);
-                clientView.setText("");
+                SERVER.message(login + ": " + text);
+                CLIENT_VIEW.setText("");
             }
         } else {
             appendMessage("Нет подключения к серверу");
@@ -74,7 +78,7 @@ public class Client implements ClientApi {
     }
 
     public void appendMessage(String message) {
-        clientView.appendMessage(message);
+        CLIENT_VIEW.appendMessage(message);
 
     }
 }

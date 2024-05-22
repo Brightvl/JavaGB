@@ -1,6 +1,5 @@
 package ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.client.UI;
 
-// todo надо сделать обращение к серверу через интерфейс
 import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.client.Client;
 import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.client.ClientApi;
 
@@ -132,6 +131,7 @@ public class ClientGUI extends JFrame implements ClientView {
      */
     public void getMessage() {
         client.getMessage(tfMessage.getText());
+        tfMessage.setText("");
     }
 
     public void connectToServer() {
