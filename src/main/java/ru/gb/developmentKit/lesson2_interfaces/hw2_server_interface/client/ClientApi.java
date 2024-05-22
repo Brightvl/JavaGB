@@ -13,5 +13,9 @@ public interface ClientApi {
      */
     void disconnectFromServer();
 
+    /**
+     * Отправляет сообщение на сервер
+     * @param message сообщение
+     */
     void getMessage(String message);
 }

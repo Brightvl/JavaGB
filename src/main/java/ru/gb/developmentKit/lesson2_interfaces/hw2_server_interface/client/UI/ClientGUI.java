@@ -42,12 +42,12 @@ public class ClientGUI extends JFrame implements ClientView {
      */
     private JPanel loginPanel;
 
-    private ClientApi client;
+    private final ClientApi CLIENT;
 
-    public ClientGUI(Client client, int x) {
-        this.client = client;
+    public ClientGUI(Client client, int x, int y) {
+        this.CLIENT = client;
 
-        setWindowParams(500, 500);
+        setWindowParams(x,y);
         createPanel();
         setVisible(true);
     }
@@ -130,30 +130,25 @@ public class ClientGUI extends JFrame implements ClientView {
      * Выводит сообщение из log
      */
     public void getMessage() {
-        client.getMessage(tfMessage.getText());
+        CLIENT.getMessage(tfMessage.getText());
         tfMessage.setText("");
     }
 
     public void connectToServer() {
-        client.connectToServer(tfLogin.getText());
-        if (client.isConnected()) {
+        CLIENT.connectToServer(tfLogin.getText());
+        if (CLIENT.isConnected()) {
             loginPanel.setVisible(false);
         }
     }
 
     public void disconnectFromServer() {
-        client.disconnectFromServer();
+        CLIENT.disconnectFromServer();
         disconnectClient();
     }
 
     @Override
     public void appendMessage(String message) {
         log.append(message + "\n");
-    }
-
-    @Override
-    public void setText(String text) {
-        tfMessage.getText();
     }
 
     @Override
@@ -165,7 +160,7 @@ public class ClientGUI extends JFrame implements ClientView {
 
     @Override
     public void disconnectClient() {
-        if (!client.isConnected()) {
+        if (!CLIENT.isConnected()) {
             loginPanel.setVisible(true);
         }
     }

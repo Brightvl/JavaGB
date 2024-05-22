@@ -11,7 +11,6 @@ public class GeneralChatApp {
         server.showGUI();
 
         new Client(server);
-
         new Client(server);
     }
 }

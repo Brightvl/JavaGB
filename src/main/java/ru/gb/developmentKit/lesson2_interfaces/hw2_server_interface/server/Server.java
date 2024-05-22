@@ -1,11 +1,11 @@
 package ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.server;
 
-import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.client.Client;
-import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.server.UI.ServerGUI;
 import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.View;
+import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.client.Client;
+import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.repository.Repository;
+import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.repository.Serialize;
+import ru.gb.developmentKit.lesson2_interfaces.hw2_server_interface.server.UI.ServerGUI;
 
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +15,10 @@ public class Server implements ServerAdminApi {
      */
     public static final String PATH = "src/main/java/ru/gb/developmentKit/lesson1_GUI/hw1_server/data/log.txt";
 
+    /**
+     * Для сохранения и загрузки из файла
+     */
+    private final Serialize serialize;
     /**
      * Хранит в себе клиентов работающих с сервером
      */
@@ -33,13 +37,13 @@ public class Server implements ServerAdminApi {
 
     public Server() {
         CLIENT_GUI_LIST = new ArrayList<>();
+        serialize = new Repository();
     }
 
 
     public void showGUI() {
         serverGUI = new ServerGUI(this);
     }
-
 
 
     public void disconnectUser(Client client) {
@@ -66,12 +70,7 @@ public class Server implements ServerAdminApi {
      * @param text текст сообщений
      */
     private void saveInLog(String text) {
-        try (FileWriter writer = new FileWriter(PATH, true)) {
-            writer.write(text);
-            writer.write("\n");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        serialize.save(PATH, text);
     }
 
     /**
@@ -80,18 +79,7 @@ public class Server implements ServerAdminApi {
      * @return строка со всеми сообщениями
      */
     private String readLog() {
-        StringBuilder stringBuilder = new StringBuilder();
-        try (FileReader reader = new FileReader(PATH);) {
-            int c;
-            while ((c = reader.read()) != -1) {
-                stringBuilder.append((char) c);
-            }
-            stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
-            return stringBuilder.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        return serialize.read(PATH);
     }
 
     @Override

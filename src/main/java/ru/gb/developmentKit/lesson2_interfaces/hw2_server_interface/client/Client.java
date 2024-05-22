@@ -29,7 +29,7 @@ public class Client implements ClientApi {
 
     public Client(Server server) {
         this.SERVER = server;
-        this.CLIENT_VIEW = new ClientGUI(this, 50);
+        this.CLIENT_VIEW = new ClientGUI(this, 500, 500);
     }
 
 
@@ -70,7 +70,7 @@ public class Client implements ClientApi {
             String text = message;
             if (!text.isEmpty()) {
                 SERVER.message(login + ": " + text);
-                CLIENT_VIEW.setText("");
+
             }
         } else {
             appendMessage("Нет подключения к серверу");

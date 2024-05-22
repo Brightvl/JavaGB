@@ -26,7 +26,7 @@ public class ServerGUI extends JFrame implements View {
      */
     private JTextArea log;
 
-    private ServerAdminApi server;
+    private final ServerAdminApi server;
 
 
     /**
@@ -119,11 +119,6 @@ public class ServerGUI extends JFrame implements View {
     @Override
     public void appendMessage(String message) {
         log.append(message + "\n");
-    }
-
-    @Override
-    public void setText(String text) {
-        log.setText(text);
     }
 }
 
