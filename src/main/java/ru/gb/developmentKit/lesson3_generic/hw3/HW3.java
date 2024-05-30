@@ -22,8 +22,8 @@ public class HW3 {
 
         {//Task_3
             Pair<Calculator, String> pairs = new Pair<>(new Calculator(), "Строка ");
-            System.out.println(pairs.getFirst());
-            System.out.println(pairs.getSecond());
+            System.out.println(pairs.first());
+            System.out.println(pairs.second());
             System.out.println(pairs);
         }
     }
@@ -83,29 +83,15 @@ class HWTask2 {
 //endregion
 
 //region Task_3
+
 /**
  * Task_3
  * <p>
  * - Напишите обобщенный класс Pair, который представляет собой пару значений разного типа. Класс должен иметь методы
- * getFirst(), getSecond() для получения значений каждого из составляющих пары, а также переопределение метода toString(), возвращающее строковое представление пары.
+ * getFirst(), getSecond() для получения значений каждого из составляющих пары, а также переопределение метода
+ * toString(), возвращающее строковое представление пары.
  */
-class Pair<T, U> {
-
-    private final T first;
-    private final U second;
-
-    public Pair(T first, U second) {
-        this.first = first;
-        this.second = second;
-    }
-
-    public T getFirst() {
-        return first;
-    }
-
-    public U getSecond() {
-        return second;
-    }
+record Pair<T, U>(T first, U second) {
 
     @Override
     public String toString() {
