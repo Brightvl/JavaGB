@@ -9,12 +9,12 @@ public class Philosopher extends Thread {
     private final String name;
     private final int leftFork;
     private final int rightFork;
-    private int amountFoodIntake;
+    private final int amountFoodIntake;
     private int countEat;
 
     private final Random random;
     private final CountDownLatch cdl;
-    private Colorant colorant;
+    private final Colorant colorant;
 
     private final Table table;
 
