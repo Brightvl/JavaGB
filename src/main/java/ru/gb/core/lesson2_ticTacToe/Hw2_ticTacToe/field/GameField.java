@@ -1,7 +1,7 @@
-package ru.gb.core.lesson2.Hw2.field;
+package ru.gb.core.lesson2_ticTacToe.Hw2_ticTacToe.field;
 
 
-import ru.gb.core.lesson2.Hw2.ui.Colorant;
+import ru.gb.core.lesson2_ticTacToe.Hw2_ticTacToe.ui.Colorant;
 
 public class GameField {
 

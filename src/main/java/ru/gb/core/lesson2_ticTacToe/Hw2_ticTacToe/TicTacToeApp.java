@@ -1,7 +1,7 @@
-package ru.gb.core.lesson2.Hw2;
+package ru.gb.core.lesson2_ticTacToe.Hw2_ticTacToe;
 
 
-import ru.gb.core.lesson2.Hw2.ui.GameProcess;
+import ru.gb.core.lesson2_ticTacToe.Hw2_ticTacToe.ui.GameProcess;
 /* ТЗ
 1. Полностью разобраться с кодом программы разработанной на семинаре, переписать программу.
 Это минимальная задача для сдачи домашней работы.

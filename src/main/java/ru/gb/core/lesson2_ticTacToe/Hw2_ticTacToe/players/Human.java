@@ -1,7 +1,7 @@
-package ru.gb.core.lesson2.Hw2.players;
+package ru.gb.core.lesson2_ticTacToe.Hw2_ticTacToe.players;
 
 
-import ru.gb.core.lesson2.Hw2.ui.GameProcess;
+import ru.gb.core.lesson2_ticTacToe.Hw2_ticTacToe.ui.GameProcess;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

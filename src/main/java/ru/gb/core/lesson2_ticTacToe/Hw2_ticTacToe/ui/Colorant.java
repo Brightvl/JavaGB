@@ -1,4 +1,4 @@
-package ru.gb.core.lesson2.Hw2.ui;
+package ru.gb.core.lesson2_ticTacToe.Hw2_ticTacToe.ui;
 
 public class Colorant {
 
@@ -15,6 +15,30 @@ public class Colorant {
         StringBuilder stringBuilder = new StringBuilder("\u001B[" + color + "m" + s + "\u001B[0m");
         return stringBuilder.toString();
 
+    }
+    /**
+     * Чтобы раскрасить и стилизовать текст в консоли
+     *
+     * @param color номер цвета ANSI Escape
+     * @param style номер стиля ANSI Escape
+     * @param s     строка текста
+     * @return      стилизованная строка
+     */
+    public String stringColorAndStyle(int color, int style, String s) {
+        StringBuilder stringBuilder = new StringBuilder("\u001B[" + style + ";" + color + "m" + s + "\u001B[0m");
+        return stringBuilder.toString();
+    }
+    /**
+     * Чтобы раскрасить и стилизовать текст в консоли
+     *
+     * @param color номер цвета ANSI Escape
+     * @param style номер стиля ANSI Escape
+     * @param s     строка текста
+     * @return      стилизованная строка
+     */
+    public String stringColorAndStyle(int color, int style, int s) {
+        StringBuilder stringBuilder = new StringBuilder("\u001B[" + style + ";" + color + "m" + s + "\u001B[0m");
+        return stringBuilder.toString();
     }
 
     /**

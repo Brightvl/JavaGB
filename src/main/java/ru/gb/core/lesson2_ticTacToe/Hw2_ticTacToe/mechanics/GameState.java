@@ -1,7 +1,7 @@
-package ru.gb.core.lesson2.Hw2.mechanics;
+package ru.gb.core.lesson2_ticTacToe.Hw2_ticTacToe.mechanics;
 
 
-import ru.gb.core.lesson2.Hw2.field.GameField;
+import ru.gb.core.lesson2_ticTacToe.Hw2_ticTacToe.field.GameField;
 
 public class GameState {
 

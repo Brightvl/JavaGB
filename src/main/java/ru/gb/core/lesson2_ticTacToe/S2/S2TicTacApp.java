@@ -1,4 +1,4 @@
-package ru.gb.core.lesson2.S2;
+package ru.gb.core.lesson2_ticTacToe.S2;
 
 import java.util.Random;
 import java.util.Scanner;

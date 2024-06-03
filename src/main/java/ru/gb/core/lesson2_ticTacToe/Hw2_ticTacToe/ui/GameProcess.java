@@ -1,11 +1,11 @@
-package ru.gb.core.lesson2.Hw2.ui;
+package ru.gb.core.lesson2_ticTacToe.Hw2_ticTacToe.ui;
 
 
-import ru.gb.core.lesson2.Hw2.field.GameField;
-import ru.gb.core.lesson2.Hw2.mechanics.GameState;
-import ru.gb.core.lesson2.Hw2.players.Bot;
-import ru.gb.core.lesson2.Hw2.players.Human;
-import ru.gb.core.lesson2.Hw2.players.Player;
+import ru.gb.core.lesson2_ticTacToe.Hw2_ticTacToe.field.GameField;
+import ru.gb.core.lesson2_ticTacToe.Hw2_ticTacToe.mechanics.GameState;
+import ru.gb.core.lesson2_ticTacToe.Hw2_ticTacToe.players.Bot;
+import ru.gb.core.lesson2_ticTacToe.Hw2_ticTacToe.players.Human;
+import ru.gb.core.lesson2_ticTacToe.Hw2_ticTacToe.players.Player;
 
 import java.util.InputMismatchException;
 import java.util.Random;

@@ -1,4 +1,4 @@
-package ru.gb.core.lesson2.Hw2.mechanics;
+package ru.gb.core.lesson2_ticTacToe.Hw2_ticTacToe.mechanics;
 
 public class Turn {
     private int y;
