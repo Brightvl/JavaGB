@@ -59,7 +59,7 @@ public class Philosopher extends Thread {
                             " в левой руке " + colorant.stringColorAndStyle((30 + (leftFork % 10)), 1, leftFork + 1)
                             + ", в правой " + colorant.stringColorAndStyle((30 + (rightFork % 10)), 1, rightFork + 1));
 
-            sleep(random.nextLong(3000, 6000));
+            sleep(random.nextLong(1000, 1500));
             table.putForks(leftFork, rightFork);
 
             System.out.println(name + " " +
@@ -72,6 +72,6 @@ public class Philosopher extends Thread {
     }
 
     private void thinking() throws InterruptedException {
-        sleep(random.nextLong(100, 2000));
+        sleep(random.nextLong(10, 200));
     }
 }
