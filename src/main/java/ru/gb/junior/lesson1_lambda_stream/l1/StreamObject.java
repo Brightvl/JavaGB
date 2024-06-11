@@ -1,4 +1,4 @@
-package ru.gb.junior.lesson1_stream.l1;
+package ru.gb.junior.lesson1_lambda_stream.l1;
 
 
 import java.util.*;

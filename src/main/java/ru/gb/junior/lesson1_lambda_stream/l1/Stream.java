@@ -1,8 +1,6 @@
-package ru.gb.junior.lesson1_stream.l1;
+package ru.gb.junior.lesson1_lambda_stream.l1;
 
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
