@@ -127,7 +127,6 @@ public class Homework {
      * Сгруппировать сотрудников по департаментам
      */
     static Map<Department, List<Person>> groupByDepartment(List<Person> people) {
-        // до этого решения пришел мягко говоря не сразу
         return people.stream()
                 .collect(Collectors.groupingBy(Person::getDepart));
     }
