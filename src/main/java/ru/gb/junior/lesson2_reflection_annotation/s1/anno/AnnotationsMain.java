@@ -1,12 +1,21 @@
-package ru.gb.junior.lesson2_reflection.s1.anno;
+package ru.gb.junior.lesson2_reflection_annotation.s1.anno;
 
 
-import ru.gb.junior.lesson2_reflection.s1.anno.lib.ObjectCreator;
-import ru.gb.junior.lesson2_reflection.s1.anno.lib.Random;
+import ru.gb.junior.lesson2_reflection_annotation.s1.anno.lib.ObjectCreator;
+import ru.gb.junior.lesson2_reflection_annotation.s1.anno.lib.Random;
 
 public class AnnotationsMain {
 
   public static void main(String[] args) {
+
+    /*
+    Аналогия препода:
+    Аннотации это стикеры.
+    Фабричный метод это охранник который на всех сотрудников повесил стикеры (как на поля аннотации).
+    А логика в классе RandomAnnotationProcessor это по сути КПП которое решает что согласно этому стикеру (пропуск)
+    нужно делать с сотрудником
+     */
+    // Чтобы аннотации работали, мы сделали специальную фабрику под него
     Person rndPerson = ObjectCreator.createObj(Person.class);
     System.out.println("age1 = " + rndPerson.age1);
     System.out.println("age2 = " + rndPerson.age2);

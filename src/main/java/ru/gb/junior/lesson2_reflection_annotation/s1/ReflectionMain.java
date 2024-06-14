@@ -1,4 +1,4 @@
-package ru.gb.junior.lesson2_reflection.s1;
+package ru.gb.junior.lesson2_reflection_annotation.s1;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -149,6 +149,9 @@ public class ReflectionMain {
         }
     }
 
+    /*
+    Класс для объяснения Decelerated выше
+     */
     private static class ExtPerson extends Person {
 
         @Override
@@ -158,7 +161,7 @@ public class ReflectionMain {
     }
 
     /*
-    Создали 2 конструктора, чтобы поработать с рефлексией.
+    Создали 2 конструктора
      */
     private static class Person {
 

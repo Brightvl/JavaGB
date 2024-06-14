@@ -1,4 +1,4 @@
-package ru.gb.junior.lesson2_reflection.l1;
+package ru.gb.junior.lesson2_reflection_annotation.l1;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -14,7 +14,7 @@ public class Main {
         // System.out.println(car);
 
         // ПОИСК
-        Class<?> car = Class.forName("ru.gb.junior.lesson2_reflection.l1.Car"); // ищем клас Car
+        Class<?> car = Class.forName("ru.gb.junior.lesson2_reflection_annotation.l1.Car"); // ищем клас Car
 
         // КОНСТРУКТОРЫ
         Constructor<?>[] constructors = car.getConstructors();// [] - потому что конструкторов может быть несколько, поэтому массив

@@ -1,4 +1,4 @@
-package ru.gb.junior.lesson2_reflection.hw;
+package ru.gb.junior.lesson2_reflection_annotation.hw;
 
 import java.util.Date;
 
