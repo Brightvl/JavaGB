@@ -1,7 +1,8 @@
 package ru.gb.junior.lesson2_reflection.s1.anno;
 
-import ru.gb.lesson2.anno.lib.ObjectCreator;
-import ru.gb.lesson2.anno.lib.Random;
+
+import ru.gb.junior.lesson2_reflection.s1.anno.lib.ObjectCreator;
+import ru.gb.junior.lesson2_reflection.s1.anno.lib.Random;
 
 public class AnnotationsMain {
 
