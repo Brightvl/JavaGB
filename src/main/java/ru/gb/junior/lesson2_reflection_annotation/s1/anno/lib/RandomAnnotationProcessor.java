@@ -94,7 +94,6 @@ public class RandomAnnotationProcessor {
 
         // Часовой пояс. Используется для преобразования между различными временными зонами.
         ZoneId zoneId = ZoneId.of(annotation.zone());
-        System.out.println(zoneId);
 
         if (min > max) {
             throw new IllegalArgumentException("min должно быть меньше max");

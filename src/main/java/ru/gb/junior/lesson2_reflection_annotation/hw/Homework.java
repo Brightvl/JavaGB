@@ -46,13 +46,13 @@ public class Homework {
         @RandomDate(min = 1735689600000L)
         private Date birthDate;
 
-        @RandomDate (min = 1735689600000L)
+        @RandomDate (min = 1735689600000L,zone = "Europe/Moscow")
         private Instant birthInstant;
 
-        @RandomDate(min = 1735689600000L,zone = "Europe/Moscow")
+        @RandomDate
         private LocalDate birthLocalDate;
 
-        @RandomDate(min = 1735689600000L,zone = "Europe/Moscow")
+        @RandomDate
         private LocalDateTime birthLocalDateTime;
     }
 }
