@@ -12,18 +12,17 @@ public class AnnotationsMain {
     Аналогия препода:
     Аннотации это стикеры.
     Фабричный метод это охранник который на всех сотрудников повесил стикеры (как на поля аннотации).
-    А логика в классе RandomAnnotationProcessor это по сути КПП которое решает что согласно этому стикеру (пропуск)
+    А логика в классе AnnotationProcessor это по сути КПП которое решает что согласно этому стикеру (пропуск)
     нужно делать с сотрудником
      */
-    // Чтобы аннотации работали, мы сделали специальную фабрику под него
+
+    // Создаем объект Person с использованием фабрики ObjectCreator
     Person rndPerson = ObjectCreator.createObj(Person.class);
+    // Выводим значения полей age1 и age2
     System.out.println("age1 = " + rndPerson.age1);
     System.out.println("age2 = " + rndPerson.age2);
 
-    // extPerson.isAssignableFrom(ExtPerson.class) // true
-    // extPerson.isAssignableFrom(Person.class) // false
-    // person.isAssignableFrom(ExtPerson.class) // true
-
+    // Примеры использования метода isAssignableFrom для проверки наследования классов
     Person p = new Person();
     Person ep = new ExtPerson();
 
@@ -41,10 +40,10 @@ public class AnnotationsMain {
 
   public static class Person {
 
-    @Random // рандомное число в диапазоне [0, 100)
+    @Random // Аннотированное поле, значение будет в диапазоне [0, 100)
     private int age1;
 
-    @Random(min = 50, max = 51) // рандомное число в диапазоне [50, 51) => 50
+    @Random(min = 50, max = 51) // Аннотированное поле, значение будет 50
     private int age2;
 
     @Random
