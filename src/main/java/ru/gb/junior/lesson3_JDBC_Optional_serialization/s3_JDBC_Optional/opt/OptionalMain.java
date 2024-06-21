@@ -1,4 +1,4 @@
-package ru.gb.junior.lesson3_JDBC_serialization.s3_JDBC.opt;
+package ru.gb.junior.lesson3_JDBC_Optional_serialization.s3_JDBC_Optional.opt;
 
 import lombok.Getter;
 
@@ -38,6 +38,8 @@ public class OptionalMain {
       .filter(it -> it.getId() == 2L)
       .findFirst();
 
+    // isPresent если true то вызывается следующая за ней лямбда
+
 //    if (userOpt.isPresent()) {
 //      String email = userOpt.get().getEmail();
 //      sendEmail(email);
@@ -62,6 +64,7 @@ public class OptionalMain {
     //    .or(this::findDefaultUser);
     // findDefaultUser -> Optional<User>
 
+    // isPresentOrElse если true то вызывается следующая за ней лямбда иначе другая
 //    itemOpt.ifPresentOrElse(
 //      it -> System.out.println("Найден объект: " + it),
 //      () -> System.out.println("Объект не найден")

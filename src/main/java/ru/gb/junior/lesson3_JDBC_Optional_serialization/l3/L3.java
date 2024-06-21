@@ -1,4 +1,4 @@
-package ru.gb.junior.lesson3_JDBC_serialization.l3;
+package ru.gb.junior.lesson3_JDBC_Optional_serialization.l3;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
