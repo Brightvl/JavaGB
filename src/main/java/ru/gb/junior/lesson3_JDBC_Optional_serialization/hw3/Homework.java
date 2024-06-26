@@ -1,12 +1,14 @@
 package ru.gb.junior.lesson3_JDBC_Optional_serialization.hw3;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.sql.*;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
+
+import static ru.gb.junior.lesson3_JDBC_Optional_serialization.s3_JDBC_Optional.JDBC.createPersonTable;
+import static ru.gb.junior.lesson3_JDBC_Optional_serialization.s3_JDBC_Optional.JDBC.insertPersonData;
 
 public class Homework {
 
@@ -29,17 +31,18 @@ public class Homework {
         try (Connection connection = DriverManager.getConnection("jdbc:h2:mem:test")) {
             // 1. Создать таблицу Person (скопировать код с семинара)
             createPersonTable(connection);
+            insertPersonData(connection);
+
             // 2. Создать таблицу Department (id bigint primary key, name varchar(128) not null)
             createDepartmentTable(connection);
-            // 3. Добавить колонку department_id и внешний ключ в таблицу Person
-            addDepartmentColumnToPerson(connection);
-
-            // Вставить данные в таблицы
-            insertPersonData(connection);
             insertDepartmentData(connection);
 
-            // Обновить таблицу person, добавив department_id
-            updatePersonDepartment(connection);
+            // 3. Добавить колонку department_id и внешний ключ в таблицу Person
+            addColumnToPerson(connection);
+
+            // 4. Написать метод, который загружает Имя department по Идентификатору person
+            System.out.println(getPersonDepartmentName(connection, 2));
+
 
             System.out.println();
         } catch (SQLException e) {
@@ -47,35 +50,14 @@ public class Homework {
         }
     }
 
-    /**
-     * Создает таблицу Person
-     *
-     * @param connection   соединение с БД
-     * @throws SQLException ошибка подключения к SQL
-     */
-    protected static void createPersonTable(Connection connection) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
-            statement.execute(""" 
-                    create table person (
-                      id bigint primary key,
-                      name varchar(256),
-                      age integer,
-                      active boolean
-                    )
-                    """);
-        } catch (SQLException e) {
-            System.err.println("Во время создания таблицы произошла ошибка: " + e.getMessage());
-            throw e;
-        }
-    }
 
     /**
      * Создает таблицу Department
      *
-     * @param connection   соединение с БД
+     * @param connection соединение с БД
      * @throws SQLException ошибка подключения к SQL
      */
-    protected static void createDepartmentTable(Connection connection) throws SQLException {
+    private static void createDepartmentTable(Connection connection) throws SQLException {
         try (Statement statement = connection.createStatement()) {
             statement.execute("""
                     create table department (
@@ -90,59 +72,12 @@ public class Homework {
     }
 
     /**
-     * Добавляет колонку department_id и внешний ключ в таблицу person
-     *
-     * @param connection соединение
-     * @throws SQLException ошибка подключения к SQL
-     */
-    protected static void addDepartmentColumnToPerson(Connection connection) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
-            // Сначала добавляем колонку department_id
-            statement.execute("""
-                    alter table person
-                    add column department_id bigint""");
-            // Затем добавляем ограничение внешнего ключа
-            statement.execute("""
-                    alter table person
-                        add constraint fk_department foreign key (department_id) references department(id)""");
-
-        } catch (SQLException e) {
-            System.err.println("Во время изменения таблицы Person произошла ошибка: " + e.getMessage());
-            throw e;
-        }
-    }
-
-    /**
-     * Вставляет данные в таблицу person
-     *
-     * @param connection соединение
-     * @throws SQLException ошибка подключения к SQL
-     */
-    protected static void insertPersonData(Connection connection) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
-            StringBuilder insertQuery = new StringBuilder("insert into person(id, name, age, active) values\n");
-            for (int i = 1; i <= 10; i++) {
-                int age = ThreadLocalRandom.current().nextInt(20, 60);
-                boolean active = ThreadLocalRandom.current().nextBoolean();
-                insertQuery.append(String.format("(%s, '%s', %s, %s)", i, "Person #" + i, age, active));
-
-                if (i != 10) {
-                    insertQuery.append(",\n");
-                }
-            }
-
-            int insertCount = statement.executeUpdate(insertQuery.toString());
-            System.out.println("Вставлено строк: " + insertCount);
-        }
-    }
-
-    /**
      * Вставляет данные в таблицу department
      *
      * @param connection соединение
      * @throws SQLException ошибка подключения к SQL
      */
-    protected static void insertDepartmentData(Connection connection) throws SQLException {
+    private static void insertDepartmentData(Connection connection) throws SQLException {
         try (Statement statement = connection.createStatement()) {
             StringBuilder insertQuery = new StringBuilder("insert into department(id, name) values\n");
             for (int i = 1; i <= 5; i++) {
@@ -159,30 +94,35 @@ public class Homework {
     }
 
     /**
-     * Обновляет таблицу person, добавляя department_id
+     * Добавить в таблицу Person поле department_id типа bigint (внешний ключ)
      *
      * @param connection соединение
-     * @throws SQLException ошибка подключения к SQL
      */
-    protected static void updatePersonDepartment(Connection connection) throws SQLException {
+    private static void addColumnToPerson(Connection connection) {
         try (Statement statement = connection.createStatement()) {
-            StringBuilder updateQuery = new StringBuilder();
-            for (int i = 1; i <= 10; i++) {
-                long departmentId = ThreadLocalRandom.current().nextLong(1, 6); // Генерируем случайный ID отдела
-                updateQuery.append(String.format("update person set department_id = %s where id = %s;\n", departmentId, i));
-            }
-            statement.executeUpdate(updateQuery.toString());
+            statement.execute("""
+                    ALTER TABLE person
+                    ADD COLUMN department_id bigint;""");
+
+            statement.execute("""
+                    ALTER TABLE person
+                    ADD CONSTRAINT fk_department_id
+                    FOREIGN KEY (department_id)
+                    REFERENCES department(id)""");
         } catch (SQLException e) {
-            System.err.println("Во время обновления таблицы Person произошла ошибка: " + e.getMessage());
-            throw e;
+            throw new RuntimeException(e);
         }
     }
+
 
     /**
      * Пункт 4
      */
     private static String getPersonDepartmentName(Connection connection, long personId) throws SQLException {
-        // FIXME: Ваш код тут
+
+        try (Statement statement = connection.prepareStatement("""
+                """)) {
+        }
         throw new UnsupportedOperationException();
     }
 
@@ -200,6 +140,38 @@ public class Homework {
     private static Map<String, List<String>> getDepartmentPersons(Connection connection) throws SQLException {
         // FIXME: Ваш код тут
         throw new UnsupportedOperationException();
+    }
+
+}
+
+@Setter
+@Getter
+class Person {
+    private long id;
+    private String name;
+    private int age;
+    private boolean active;
+    private Long departmentId;
+
+    public Person(long id, String name, int age, boolean active, Long departmentId) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.active = active;
+        this.departmentId = departmentId;
+    }
+
+}
+
+@Setter
+@Getter
+class Department {
+    private long id;
+    private String name;
+
+    public Department(long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
 }

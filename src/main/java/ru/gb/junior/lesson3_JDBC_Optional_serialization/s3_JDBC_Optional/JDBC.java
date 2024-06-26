@@ -34,7 +34,7 @@ public class JDBC {
         h2 - бд которая существует только во время работы программы
      */
         try (Connection connection = DriverManager.getConnection("jdbc:h2:mem:test")) {
-            createTable(connection);
+            createPersonTable(connection);
             insertPersonData(connection);
             String age = "55";
             System.out.println("Person с возрастом 55: " + selectNamesByAge(connection, age));
@@ -52,7 +52,7 @@ public class JDBC {
      * @param connection соединение с БД
      * @throws SQLException ошибка подключения к SQL
      */
-    protected static void createTable(Connection connection) throws SQLException {
+    public static void createPersonTable(Connection connection) throws SQLException {
         try (Statement statement = connection.createStatement()) {
             // выполняет заданную инструкцию SQL
             statement.execute("""
@@ -75,7 +75,7 @@ public class JDBC {
      * @param connection соединение
      * @throws SQLException ошибка подключения к SQL
      */
-    protected static void insertPersonData(Connection connection) throws SQLException {
+    public static void insertPersonData(Connection connection) throws SQLException {
         try (Statement statement = connection.createStatement()) {
             StringBuilder insertQuery = new StringBuilder("insert into person(id, name, age, active) values\n");
             for (int i = 1; i <= 10; i++) {
