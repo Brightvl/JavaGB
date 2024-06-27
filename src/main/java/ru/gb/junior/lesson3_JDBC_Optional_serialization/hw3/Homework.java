@@ -288,9 +288,9 @@ public class Homework {
 
     /**
      *
-     * @param connection
-     * @return
-     * @throws SQLException
+     * @param connection соединение
+     * @return Map<Person, Department></Person,>
+     * @throws SQLException исключение
      */
     private static Map<Person, Department> getPersonDepartmentMap(Connection connection) throws SQLException {
         Map<Person, Department> map = new HashMap<>();
@@ -329,9 +329,9 @@ public class Homework {
 
     /**
      *
-     * @param connection
-     * @return
-     * @throws SQLException
+     * @param connection соединение
+     * @return Map<Department, List<Person>>
+     * @throws SQLException исключение
      */
     private static Map<Department, List<Person>> getDepartmentPersonMap(Connection connection) throws SQLException {
         Map<Department, List<Person>> map = new HashMap<>();
