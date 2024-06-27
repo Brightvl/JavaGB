@@ -145,7 +145,7 @@ public class JDBC {
      * @param connection соединение
      * @throws SQLException ошибка подключения к SQL
      */
-    private static void selectData(Connection connection) throws SQLException {
+    public static void selectData(Connection connection) throws SQLException {
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("""
                     select id, name, age

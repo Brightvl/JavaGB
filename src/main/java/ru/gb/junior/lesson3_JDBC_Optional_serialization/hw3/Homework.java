@@ -7,8 +7,7 @@ import java.sql.*;
 import java.util.List;
 import java.util.Map;
 
-import static ru.gb.junior.lesson3_JDBC_Optional_serialization.s3_JDBC_Optional.JDBC.createPersonTable;
-import static ru.gb.junior.lesson3_JDBC_Optional_serialization.s3_JDBC_Optional.JDBC.insertPersonData;
+import static ru.gb.junior.lesson3_JDBC_Optional_serialization.s3_JDBC_Optional.JDBC.*;
 
 public class Homework {
 
@@ -39,10 +38,15 @@ public class Homework {
 
             // 3. Добавить колонку department_id и внешний ключ в таблицу Person
             addColumnToPerson(connection);
+            updatePersonDepartments(connection);
+
+            selectAllData(connection, "person");
 
             // 4. Написать метод, который загружает Имя department по Идентификатору person
-            System.out.println(getPersonDepartmentName(connection, 2));
+            System.out.println(getPersonDepartmentName(connection, 3));
 
+            // * Написать метод, который загружает Map<String, String>, в которой маппинг person.name ->
+            //    department.name Пример: [{"person #1", "department #1"}, {"person #2", "department #3}]
 
             System.out.println();
         } catch (SQLException e) {
@@ -66,7 +70,7 @@ public class Homework {
                     )
                     """);
         } catch (SQLException e) {
-            System.err.println("Во время создания таблицы произошла ошибка: " + e.getMessage());
+            System.err.println("Во время создания таблицы department произошла ошибка: " + e.getMessage());
             throw e;
         }
     }
@@ -89,7 +93,7 @@ public class Homework {
             }
 
             int insertCount = statement.executeUpdate(insertQuery.toString());
-            System.out.println("Вставлено строк: " + insertCount);
+            System.out.println("Вставлено строк в department: " + insertCount);
         }
     }
 
@@ -100,10 +104,11 @@ public class Homework {
      */
     private static void addColumnToPerson(Connection connection) {
         try (Statement statement = connection.createStatement()) {
+            // сначала мутим саму колонку
             statement.execute("""
                     ALTER TABLE person
                     ADD COLUMN department_id bigint;""");
-
+            // потом даем ей параметры
             statement.execute("""
                     ALTER TABLE person
                     ADD CONSTRAINT fk_department_id
@@ -114,17 +119,70 @@ public class Homework {
         }
     }
 
+    /**
+     * Обновить таблицу Person, добавив каждому person department
+     *
+     * @param connection соединение
+     * @throws SQLException ошибка подключения к SQL
+     */
+    private static void updatePersonDepartments(Connection connection) throws SQLException {
+        try (Statement statement = connection.createStatement()) {
+            for (int i = 1; i <= 10; i++) {
+                long departmentId = (i % 5) + 1;
+                statement.executeUpdate(String.format(
+                        "UPDATE person SET department_id = %d WHERE id = %d", departmentId, i));
+            }
+        }
+    }
 
     /**
-     * Пункт 4
+     * Получить имя department по id person
      */
     private static String getPersonDepartmentName(Connection connection, long personId) throws SQLException {
-
-        try (Statement statement = connection.prepareStatement("""
-                """)) {
+        try (PreparedStatement statement = connection.prepareStatement("""
+                SELECT d.name
+                FROM person p
+                JOIN Department d ON p.department_id = d.id
+                WHERE p.id = ?""")) {
+            statement.setLong(1, personId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getString("name");
+                } else {
+                    return "Не установлен!";
+                }
+            }
         }
-        throw new UnsupportedOperationException();
     }
+
+    /**
+     * Получить все данные таблицы
+     *
+     * @param connection соединение
+     * @throws SQLException ошибка подключения к SQL
+     */
+    private static void selectAllData(Connection connection, String tableName) throws SQLException {
+        String query = String.format("SELECT * FROM %s", tableName);
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            ResultSet resultSet = statement.executeQuery();
+
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            while (resultSet.next()) {
+                for (int i = 1; i <= columnCount; i++) {
+                    String columnName = metaData.getColumnName(i);
+                    Object columnValue = resultSet.getObject(i);
+                    System.out.print(columnName + " = " + columnValue + "; ");
+                }
+                System.out.println();
+            }
+        } catch (SQLException e) {
+            System.err.println("Во время выполнения запроса произошла ошибка: " + e.getMessage());
+            throw e;
+        }
+    }
+
+
 
     /**
      * Пункт 5
@@ -144,34 +202,3 @@ public class Homework {
 
 }
 
-@Setter
-@Getter
-class Person {
-    private long id;
-    private String name;
-    private int age;
-    private boolean active;
-    private Long departmentId;
-
-    public Person(long id, String name, int age, boolean active, Long departmentId) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.active = active;
-        this.departmentId = departmentId;
-    }
-
-}
-
-@Setter
-@Getter
-class Department {
-    private long id;
-    private String name;
-
-    public Department(long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-}
