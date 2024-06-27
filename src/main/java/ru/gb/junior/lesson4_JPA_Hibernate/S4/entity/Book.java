@@ -1,4 +1,4 @@
-package ru.gb.junior.lesson4_JPA.entity;
+package ru.gb.junior.lesson4_JPA_Hibernate.S4.entity;
 
 import jakarta.persistence.*;
 

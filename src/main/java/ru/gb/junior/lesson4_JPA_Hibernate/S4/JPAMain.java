@@ -1,12 +1,12 @@
-package ru.gb.junior.lesson4_JPA;
+package ru.gb.junior.lesson4_JPA_Hibernate.S4;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import ru.gb.junior.lesson4_JPA.entity.Author;
-import ru.gb.junior.lesson4_JPA.entity.AuthorBook;
-import ru.gb.junior.lesson4_JPA.entity.Book;
+import ru.gb.junior.lesson4_JPA_Hibernate.S4.entity.Author;
+import ru.gb.junior.lesson4_JPA_Hibernate.S4.entity.AuthorBook;
+import ru.gb.junior.lesson4_JPA_Hibernate.S4.entity.Book;
 
 
 public class JPAMain {

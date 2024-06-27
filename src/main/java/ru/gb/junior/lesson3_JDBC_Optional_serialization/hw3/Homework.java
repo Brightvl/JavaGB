@@ -337,7 +337,13 @@ public class Homework {
         Map<Department, List<Person>> map = new HashMap<>();
 
         String query = """
-                SELECT p.id AS person_id, p.name AS person_name, p.age AS person_age, p.department_id, d.id AS department_id, d.name AS department_name
+                SELECT
+                    p.id AS person_id,
+                    p.name AS person_name,
+                    p.age AS person_age,
+                    p.department_id,
+                    d.id AS department_id,
+                    d.name AS department_name
                 FROM person p
                 JOIN department d ON p.department_id = d.id
                 """;

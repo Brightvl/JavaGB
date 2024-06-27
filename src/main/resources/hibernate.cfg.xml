@@ -3,6 +3,7 @@
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
+
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
         <property name="hibernate.connection.username">postgres</property>
@@ -12,8 +13,8 @@
         <!-- none, create, create-drop, update, validate-->
         <property name="hibernate.hbm2ddl.auto">create</property>
 
-        <mapping class="ru.gb.junior.lesson4_JPA.entity.Author"/>
-        <mapping class="ru.gb.junior.lesson4_JPA.entity.Book"/>
-        <mapping class="ru.gb.junior.lesson4_JPA.entity.AuthorBook"/>
+        <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.S4.entity.Author"/>
+        <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.S4.entity.Book"/>
+        <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.S4.entity.AuthorBook"/>
     </session-factory>
 </hibernate-configuration>
