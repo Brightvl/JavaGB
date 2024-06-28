@@ -26,7 +26,7 @@ public class Book {
 //    joinColumns = @JoinColumn(name = "book_id"),
 //    inverseJoinColumns = @JoinColumn(name = "author_id")
 //  )
-//  private List<Author> authors;
+//  private List<User> authors;
 
   public Book() {
 
@@ -48,11 +48,11 @@ public class Book {
     this.name = name;
   }
 
-//  public List<Author> getAuthors() {
+//  public List<User> getAuthors() {
 //    return authors;
 //  }
 //
-//  public void setAuthors(List<Author> authors) {
+//  public void setAuthors(List<User> authors) {
 //    this.authors = authors;
 //  }
 

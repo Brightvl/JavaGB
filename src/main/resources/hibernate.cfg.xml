@@ -9,7 +9,7 @@
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">pass</property>
         <!--        Показывает все Sql запросы в консоль-->
-        <property name="show_sql">true</property>
+<!--        <property name="show_sql">true</property>-->
 
         <!-- настройка автоматически накатывать структуру таблиц-->
         <!-- none, create, create-drop, update, validate-->
@@ -21,12 +21,13 @@
 
         <!--Сущности -->
         <!--S4 Hibernate JJ-->
-<!--        <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.S4.entity.Author"/>-->
+<!--        <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.S4.entity.User"/>-->
 <!--        <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.S4.entity.Book"/>-->
 <!--        <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.S4.entity.AuthorBook"/>-->
 
         <!--HW 4 Hibernate JJ-->
          <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.hw4.entity.Post"/>
          <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.hw4.entity.PostComment"/>
+         <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.hw4.entity.User"/>
     </session-factory>
 </hibernate-configuration>

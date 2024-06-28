@@ -5,23 +5,23 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
-@Table
+@Table(name = "post_comment")
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PostComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     Long id;
 
     @Column
     String text;
 
-    @Column
-    Long post_id;
+    @ManyToOne
+    @JoinColumn(name = "post_id", nullable = false)
+    Post post;
 
     @Temporal(TemporalType.TIMESTAMP)
     Date timestamp;
@@ -29,5 +29,4 @@ public class PostComment {
     @ManyToOne
     @JoinColumn(name = "user_id")
     User user;
-
 }

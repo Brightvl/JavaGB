@@ -2,30 +2,30 @@ package ru.gb.junior.lesson4_JPA_Hibernate.hw4.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
-
 @Entity
-@Data
 @Table(name = "users")
+@Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column
+    @Column(name = "name")
     String name;
 
     @OneToMany(mappedBy = "user")
     List<Post> posts;
 
     @OneToMany(mappedBy = "user")
-    private List<PostComment> comments;
-
+    List<PostComment> comments;
 }

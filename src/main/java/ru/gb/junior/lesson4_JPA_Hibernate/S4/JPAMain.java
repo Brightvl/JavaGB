@@ -92,7 +92,7 @@ public class JPAMain {
         try (Session session = sessionFactory.openSession()) {
             Author author = new Author();
             author.setId(22L);
-            author.setName("Author");
+            author.setName("User");
 
 //            Book book = new Book();
 //            book.setId(1L);
@@ -120,14 +120,14 @@ public class JPAMain {
         try (Session session = sessionFactory.openSession()) {
             // session <-> statement
             Author author = session.find(Author.class, 1L);
-            System.out.println("Author(1) = " + author);
+            System.out.println("User(1) = " + author);
         }
         // CREATE
         try (Session session = sessionFactory.openSession()) {
             Transaction tx = session.beginTransaction();
             Author author = new Author();
             author.setId(22L);
-            author.setName("Author #22");
+            author.setName("User #22");
 
             session.persist(author); // insert
             tx.commit();

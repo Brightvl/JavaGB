@@ -58,7 +58,7 @@ public class Author { // final нельзя
 
   @Override
   public String toString() {
-    return "Author{" +
+    return "User{" +
       "id=" + id +
       ", name='" + name + '\'' +
       '}';
