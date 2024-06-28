@@ -28,7 +28,11 @@ public class Homework {
      3.3 ** Загрузить все комментарии по идентификатору юзера
      3.4 **** По идентификатору юзера загрузить юзеров, под чьими публикациями он оставлял комменты. userId -> List<User>
      Замечание: 1. Можно использовать ЛЮБУЮ базу данных (например, h2)
-     */
+
+     Подготовка:
+     console docker:
+     docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=pass -d postgres:16
+   */
 
     public static void main(String[] args) {
 
@@ -81,7 +85,7 @@ public class Homework {
      * Прочитать пост
      *
      * @param sessionFactory «экземпляр» Hibernate
-     * @param id идентификатор поста
+     * @param id             идентификатор поста
      * @return пост
      */
     private static Post getPostById(SessionFactory sessionFactory, Long id) {
@@ -94,7 +98,7 @@ public class Homework {
      * Обновить пост
      *
      * @param sessionFactory «экземпляр» Hibernate
-     * @param id идентификатор поста
+     * @param id             идентификатор поста
      */
     private static void updatePost(SessionFactory sessionFactory, Long id) {
         try (Session session = sessionFactory.openSession()) {
@@ -136,8 +140,8 @@ public class Homework {
      * Добавить комментарий к посту
      *
      * @param sessionFactory «экземпляр» Hibernate
-     * @param post пост, к которому добавляется комментарий
-     * @param textComment текст комментария
+     * @param post           пост, к которому добавляется комментарий
+     * @param textComment    текст комментария
      */
     private static void addPostCommentaryByPost(SessionFactory sessionFactory, Post post, String textComment) {
         try (Session session = sessionFactory.openSession()) {
@@ -154,7 +158,7 @@ public class Homework {
      * Прочитать комментарий по идентификатору
      *
      * @param sessionFactory «экземпляр» Hibernate
-     * @param id идентификатор комментария
+     * @param id             идентификатор комментария
      * @return комментарий
      */
     private static PostComment getPostCommentById(SessionFactory sessionFactory, Long id) {
@@ -179,7 +183,7 @@ public class Homework {
      * Загрузить все комментарии публикации
      *
      * @param sessionFactory «экземпляр» Hibernate
-     * @param postId идентификатор поста
+     * @param postId         идентификатор поста
      * @return список комментариев
      */
     private static List<PostComment> getCommentsByPostId(SessionFactory sessionFactory, Long postId) {
@@ -192,8 +196,9 @@ public class Homework {
 
     /**
      * Загрузить все публикации по идентификатору юзера
+     *
      * @param sessionFactory «экземпляр» Hibernate
-     * @param userId идентификатор юзера
+     * @param userId         идентификатор юзера
      * @return список публикаций
      */
     private static List<Post> getPostsByUserId(SessionFactory sessionFactory, Long userId) {
@@ -206,8 +211,9 @@ public class Homework {
 
     /**
      * Загрузить все комментарии по идентификатору юзера
+     *
      * @param sessionFactory «экземпляр» Hibernate
-     * @param userId идентификатор юзера
+     * @param userId         идентификатор юзера
      * @return список комментариев
      */
     private static List<PostComment> getCommentsByUserId(SessionFactory sessionFactory, Long userId) {
@@ -220,8 +226,9 @@ public class Homework {
 
     /**
      * По идентификатору юзера загрузить юзеров, под чьими публикациями он оставлял комменты
+     *
      * @param sessionFactory «экземпляр» Hibernate
-     * @param userId идентификатор юзера
+     * @param userId         идентификатор юзера
      * @return список юзеров
      */
     private static List<User> getUsersWithCommentsFromUser(SessionFactory sessionFactory, Long userId) {
