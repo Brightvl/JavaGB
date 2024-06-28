@@ -38,6 +38,9 @@ private Long id;
 используется для автоинкрементных полей.
 
 ```java
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 ```
 

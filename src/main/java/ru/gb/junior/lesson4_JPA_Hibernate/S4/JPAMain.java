@@ -51,10 +51,9 @@ public class JPAMain {
         // sessionFactory <-> connection
         // Session <-> Statement
         try (SessionFactory sessionFactory = configuration.buildSessionFactory()) {
+//            withSession(sessionFactory);
 
-            withSession(sessionFactory);
-
-            //  withSessionCRUD(sessionFactory);
+//              withSessionCRUD(sessionFactory);
         }
     }
 

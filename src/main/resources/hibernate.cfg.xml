@@ -17,16 +17,16 @@
         <!-- update если есть разница БД и в сущностях, обновляет-->
         <!-- create пересоздаст схему если ее нет-->
         <!-- create-drop создает схему если ее нет и сносит в конце-->
-<!--        <property name="hibernate.hbm2ddl.auto">create</property>-->
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
         <!--Сущности -->
         <!--S4 Hibernate JJ-->
-        <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.S4.entity.Author"/>
-        <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.S4.entity.Book"/>
-        <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.S4.entity.AuthorBook"/>
+<!--        <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.S4.entity.Author"/>-->
+<!--        <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.S4.entity.Book"/>-->
+<!--        <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.S4.entity.AuthorBook"/>-->
 
         <!--HW 4 Hibernate JJ-->
-        <!-- <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.hw4.entity.Post"/>-->
-        <!-- <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.hw4.entity.PostComment"/>-->
+         <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.hw4.entity.Post"/>
+         <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.hw4.entity.PostComment"/>
     </session-factory>
 </hibernate-configuration>

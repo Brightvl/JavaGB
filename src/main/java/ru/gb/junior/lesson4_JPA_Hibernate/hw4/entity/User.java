@@ -3,31 +3,29 @@ package ru.gb.junior.lesson4_JPA_Hibernate.hw4.entity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.sql.Timestamp;
+import java.util.List;
+
 
 @Entity
-@Table(name = "posts")
 @Data
+@Table(name = "users")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Post {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     Long id;
 
     @Column
-    @JoinColumn
-    String title;
+    String name;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    Date timestamp;
+    @OneToMany(mappedBy = "user")
+    List<Post> posts;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    User user;
+    @OneToMany(mappedBy = "user")
+    private List<PostComment> comments;
 
 }

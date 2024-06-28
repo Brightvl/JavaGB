@@ -5,6 +5,8 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
+import java.sql.Date;
+
 @Entity
 @Table
 @Data
@@ -20,5 +22,12 @@ public class PostComment {
 
     @Column
     Long post_id;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    Date timestamp;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    User user;
 
 }
