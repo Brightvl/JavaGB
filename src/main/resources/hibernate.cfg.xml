@@ -3,18 +3,30 @@
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-
+        <!--соединение -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">pass</property>
+        <!--        Показывает все Sql запросы в консоль-->
         <property name="show_sql">true</property>
 
+        <!-- настройка автоматически накатывать структуру таблиц-->
         <!-- none, create, create-drop, update, validate-->
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <!-- validate сравнивает БД и то что в сущностях, если не совпадают структуры падает-->
+        <!-- update если есть разница БД и в сущностях, обновляет-->
+        <!-- create пересоздаст схему если ее нет-->
+        <!-- create-drop создает схему если ее нет и сносит в конце-->
+<!--        <property name="hibernate.hbm2ddl.auto">create</property>-->
 
+        <!--Сущности -->
+        <!--S4 Hibernate JJ-->
         <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.S4.entity.Author"/>
         <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.S4.entity.Book"/>
         <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.S4.entity.AuthorBook"/>
+
+        <!--HW 4 Hibernate JJ-->
+        <!-- <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.hw4.entity.Post"/>-->
+        <!-- <mapping class="ru.gb.junior.lesson4_JPA_Hibernate.hw4.entity.PostComment"/>-->
     </session-factory>
 </hibernate-configuration>
