@@ -40,7 +40,6 @@ public class Homework {
         configuration.configure();
 
         try (SessionFactory sessionFactory = configuration.buildSessionFactory()) {
-            // Написать стандартные CRUD-методы: создание, загрузка, удаление.
             for (int i = 0; i < 10; i++) {
                 createPost(sessionFactory);
             }
