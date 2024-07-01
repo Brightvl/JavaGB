@@ -1,12 +1,13 @@
-package ru.gb.junior.lesson5_sockets_client_server.S5;
+package ru.gb.junior.lesson5_sockets_client_server.S5_server.data.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import ru.gb.junior.lesson5_sockets_client_server.S5_server.data.User;
 
 import java.util.List;
 
-public class JsonMain {
+public class JsonExample {
 
   public static void main(String[] args) throws JsonProcessingException {
     ListResponse response = new ListResponse();
@@ -19,7 +20,7 @@ public class JsonMain {
 
     response.setUsers(List.of(user1, user2));
 
-    ObjectWriter writer = new ObjectMapper().writer().withDefaultPrettyPrinter();
+    ObjectWriter writer = new ObjectMapper().writer().withDefaultPrettyPrinter(); // преобразовываем в json объекты
     String s = writer.writeValueAsString(response);
     System.out.println(s);
   }
