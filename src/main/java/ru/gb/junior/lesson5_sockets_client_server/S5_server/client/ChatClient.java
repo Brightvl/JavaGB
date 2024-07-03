@@ -69,6 +69,7 @@ public class ChatClient {
                     System.out.println("1. Послать сообщение другу");
                     System.out.println("2. Послать сообщение всем");
                     System.out.println("3. Получить список логинов");
+                    System.out.println("4. выйти");
 
                     String type = console.nextLine();
                     if (type.equals("1")) {
