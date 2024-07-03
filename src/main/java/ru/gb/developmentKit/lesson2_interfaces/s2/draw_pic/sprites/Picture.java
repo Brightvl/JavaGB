@@ -23,7 +23,7 @@ public class Picture extends Sprite {
         halfHeight = 64;
         halfWidth = 62;
         try {
-            image = ImageIO.read(new File("src/main/java/org/example/lesson_2/l_2/draw_pic/resource/picachu.png"));
+            image = ImageIO.read(new File("src/main/java/ru/gb/developmentKit/lesson2_interfaces/s2/draw_pic/resource/picachu.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
