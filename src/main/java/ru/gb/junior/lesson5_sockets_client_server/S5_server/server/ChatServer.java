@@ -3,10 +3,8 @@ package ru.gb.junior.lesson5_sockets_client_server.S5_server.server;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ru.gb.junior.lesson5_sockets_client_server.S5_server.data.json.AbstractRequest;
-import ru.gb.junior.lesson5_sockets_client_server.S5_server.data.json.LoginRequest;
-import ru.gb.junior.lesson5_sockets_client_server.S5_server.data.json.LoginResponse;
-import ru.gb.junior.lesson5_sockets_client_server.S5_server.data.json.SendMessageRequest;
+import ru.gb.junior.lesson5_sockets_client_server.S5_server.data.User;
+import ru.gb.junior.lesson5_sockets_client_server.S5_server.data.json.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -134,37 +132,62 @@ public class ChatServer {
                     sendMessage("Не удалось прочитать сообщение: " + e.getMessage());
                     continue;
                 }
-                // Обработка сообщения типа SendMessageRequest
-                if (SendMessageRequest.TYPE.equals(type)) {
-                    // Клиент прислал SendMessageRequest
-
-                    final SendMessageRequest request;
-                    try {
-                        request = objectMapper.reader().readValue(msgFromClient, SendMessageRequest.class);
-                    } catch (IOException e) {
-                        System.err.println("Не удалось прочитать сообщение от клиента [" + clientLogin + "]: " + e.getMessage());
-                        sendMessage("Не удалось прочитать сообщение SendMessageRequest: " + e.getMessage());
+                try {
+                    if (SendMessageRequest.TYPE.equals(type)) {
+                        handleSendMessageRequest(msgFromClient);
+                    } else if (BroadcastMessageRequest.TYPE.equals(type)) {
+                        handleBroadcastMessageRequest(msgFromClient);
+                    } else if (UsersRequest.TYPE.equals(type)) {
+                        handleUsersRequest();
+                    } else if (DisconnectRequest.TYPE.equals(type)) {
+                        break;
+                    } else {
+                        System.err.println("Неизвестный тип сообщения: " + type);
+                        sendMessage("Неизвестный тип сообщения: " + type);
                         continue;
                     }
-
-                    ClientHandler clientTo = clients.get(request.getRecipient());
-                    if (clientTo == null) {
-                        sendMessage("Клиент с логином [" + request.getRecipient() + "] не найден");
-                        continue;
-                    }
-                    clientTo.sendMessage(request.getMessage());
-                } else if (false) { // BroadcastRequest.TYPE.equals(type)
-                    // TODO: Читать остальные типы сообщений
-                } else if (false) { // DisconnectRequest.TYPE.equals(type)
-                    break;
-                } else {
-                    System.err.println("Неизвестный тип сообщения: " + type);
-                    sendMessage("Неизвестный тип сообщения: " + type);
-                    continue;
+                } catch (JsonProcessingException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
+
             }
 
             doClose();
+        }
+
+        private void handleSendMessageRequest(String msgFromClient) throws IOException {
+            SendMessageRequest request = objectMapper.reader().readValue(msgFromClient, SendMessageRequest.class);
+
+            ClientHandler clientTo = clients.get(request.getRecipient());
+            if (clientTo == null) {
+                sendMessage("Клиент с логином [" + request.getRecipient() + "] не найден");
+                return;
+            }
+            clientTo.sendMessage(request.getMessage());
+        }
+
+        private void handleBroadcastMessageRequest(String msgFromClient) throws IOException {
+            BroadcastMessageRequest request = objectMapper.reader().readValue(msgFromClient, BroadcastMessageRequest.class);
+
+            for (Map.Entry<String, ClientHandler> entry : clients.entrySet()) {
+                if (!entry.getKey().equals(clientLogin)) {
+                    entry.getValue().sendMessage(request.getMessage());
+                }
+            }
+        }
+
+        private void handleUsersRequest() throws JsonProcessingException {
+            ListResponse listResponse = new ListResponse();
+            listResponse.setUsers(clients.keySet().stream().map(login -> {
+                User user = new User();
+                user.setLogin(login);
+                return user;
+            }).toList());
+
+            String usersResponse = objectMapper.writeValueAsString(listResponse);
+            sendMessage(usersResponse);
         }
 
         /**
@@ -177,6 +200,12 @@ public class ChatServer {
                 client.close();
             } catch (IOException e) {
                 System.err.println("Ошибка во время отключения клиента: " + e.getMessage());
+            }
+            handleDisconnectNotification();
+        }
+        private void handleDisconnectNotification() {
+            for (Map.Entry<String, ClientHandler> entry : clients.entrySet()) {
+                entry.getValue().sendMessage("Клиент [" + clientLogin + "] отключился");
             }
         }
 

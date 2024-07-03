@@ -3,9 +3,7 @@ package ru.gb.junior.lesson5_sockets_client_server.S5_server.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ru.gb.junior.lesson5_sockets_client_server.S5_server.data.json.LoginRequest;
-import ru.gb.junior.lesson5_sockets_client_server.S5_server.data.json.LoginResponse;
-import ru.gb.junior.lesson5_sockets_client_server.S5_server.data.json.SendMessageRequest;
+import ru.gb.junior.lesson5_sockets_client_server.S5_server.data.json.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -83,11 +81,29 @@ public class ChatClient {
                         // Преобразуем запрос в JSON и отправляем на сервер
                         String sendMsgRequest = objectMapper.writeValueAsString(request);
                         out.println(sendMsgRequest);
+                    } else if (type.equals("2")) {
+                        System.out.println("Введите сообщение для всех:");
+                        String message = console.nextLine();
+
+                        BroadcastMessageRequest request = new BroadcastMessageRequest();
+                        request.setMessage(message);
+
+                        String broadcastMsgRequest = objectMapper.writeValueAsString(request);
+                        out.println(broadcastMsgRequest);
                     } else if (type.equals("3")) {
-                        // TODO: Создаете запрос отправки "всем"
-                        // send(get users)
-                        // String msgFromServer = in.readLine();
-                        // ...
+                        UsersRequest request = new UsersRequest();
+
+                        String usersRequest = objectMapper.writeValueAsString(request);
+                        out.println(usersRequest);
+                    } else if (type.equals("4")) {
+                        DisconnectRequest request = new DisconnectRequest();
+
+                        String disconnectRequest = objectMapper.writeValueAsString(request);
+                        out.println(disconnectRequest);
+                        break;
+                    } else {
+                        System.out.println("Неизвестная команда. Пожалуйста, введите 1, 2, 3 или 4.");
+                    }
 
 //            serverListener.subscribe("get users", new Consumer<String>() {
 //              @Override
@@ -95,8 +111,6 @@ public class ChatClient {
 //                System.out.println("Список юзеров: " + s);
 //              }
 //            });
-
-                    }
 
                 }
             }
